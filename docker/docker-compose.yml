@@ -1,8 +1,8 @@
 version: '2.1'
 
 volumes:
-    loki_data: {}
     grafana_data: {}
+    loki_data: {}
 
 services:
   
@@ -20,6 +20,8 @@ services:
     restart: unless-stopped
     expose:
       - 3000
+    ports:
+      - "3000:3000"
     labels:
       org.label-schema.group: "monitoring"
 
@@ -28,10 +30,11 @@ services:
     container_name: loki
     restart: unless-stopped
     volumes:
-      - loki_data:/var/lib/victoria-metrics
-    expose:
-      - 3100
+      - loki_data:/root/vmstorage-data
     ports:
-      - "3100:8401"
+      - "8482:8482"
+      - "8481:8481"
+      - "8480:8480"
+      - "2003:2003"
     labels:
       org.label-schema.group: "monitoring"

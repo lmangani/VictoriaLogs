@@ -10,6 +10,6 @@
                 NAME=${DOMAINS[$RANDOM % ${#DOMAINS[@]}]}
                 echo "$NAME, $TIME"
                 curl  --header "Content-Type: application/json"  --request POST \
-                        --data '{"streams": [{"labels": "{foo=\"bar\",name=\"'"$NAME"'\"}","entries": [{"ts": "'"$TIME"'", "line": "level=info string='"$RANDOM"'" }]}]}' \
-                        'http://127.0.0.1:3100/loki/api/v1/push' &
+                        --data '{"streams": [{"labels": "{level=\"WARN\",name=\"'"$NAME"'\"}","entries": [{"ts": "'"$TIME"'", "line": "level=info string='"$RANDOM"'" }]}]}' \
+                        'http://127.0.0.1:8480/insert/0/loki/api/v1/push' &
         done
